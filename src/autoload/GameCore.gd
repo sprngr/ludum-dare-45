@@ -1,6 +1,6 @@
 extends Node
 
-var current_scene = null 
+var current_scene = null
 
 func _ready():
     # Get current scene at root, store into memory for use later
