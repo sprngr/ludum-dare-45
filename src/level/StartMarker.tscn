@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/level/StartMarker.gd" type="Script" id=1]
+[ext_resource path="res://assets/icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="StartMarker" type="Area2D"]
+editor/display_folded = true
+position = Vector2( -10, 412 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="End" type="Sprite" parent="."]
+scale = Vector2( 0.187501, 0.171876 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
