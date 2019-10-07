@@ -30,7 +30,7 @@ GameState="*res://src/autoload/GameState.gd"
 window/size/width=512
 window/size/height=448
 window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/stretch/aspect="keep_width"
 
 [importer_defaults]
 

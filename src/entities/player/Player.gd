@@ -12,14 +12,20 @@ var motion = Vector2()
 
 func getEncumberedValue(base):
 	var loot = GameState.getState().loot
-	var encumbranceLevel = floor(loot / STRENGTH)
-
+	var encumbranceLevel = clamp(floor(loot / STRENGTH), 0, 3)
+	
+	if encumbranceLevel == 0:
+		$Sprite.texture = load("res://assets/protochar-sheet.png")
+	
 	if encumbranceLevel == 1:
 		base = base - ceil(base / 4)
+		$Sprite.texture = load("res://assets/protochar-sheet2.png")
 	elif encumbranceLevel == 2:
 		base = base - ceil(base / 3)
+		$Sprite.texture = load("res://assets/protochar-sheet3.png")
 	elif encumbranceLevel == 3:
 		base = base - ceil(base / 2.25)
+		$Sprite.texture = load("res://assets/protochar-sheet4.png")
 	
 	return base
 	
@@ -27,6 +33,9 @@ func getEncumberedValue(base):
 func _physics_process(delta):
 	var friction = false
 	
+	if $AnimationPlayer.is_playing():
+		$AnimationPlayer.stop(false)
+				
 	if GameState.getState().status <= GameState.STATUS.PLAYING:
 	
 		motion.y += GRAVITY
@@ -36,10 +45,14 @@ func _physics_process(delta):
 			
 			$Sprite.flip_h = false
 			$Sprite.offset.x = -8
+			if !$AnimationPlayer.is_playing():
+				$AnimationPlayer.play("Run")
 		elif Input.is_action_pressed("ui_left"):
 			motion.x = max(motion.x - getEncumberedValue(ACCELERATION), -getEncumberedValue(MAX_SPEED))
 			$Sprite.flip_h = true
 			$Sprite.offset.x = 8
+			if !$AnimationPlayer.is_playing():
+				$AnimationPlayer.play("Run")
 		else:
 			friction = true
 		

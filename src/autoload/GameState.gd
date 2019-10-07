@@ -14,14 +14,6 @@ enum STATUS {
 	SUCCESS,
 	GAMEOVER
 	}
-	
-var base_state = {
-	"level": 1,
-	"loot": 0,
-	"score": 0,
-	"time": 0,
-	"status": STATUS.READY
-	}
 
 var state = {}
 
@@ -32,7 +24,13 @@ func getState():
 	return state
 
 func reset():
-	state = base_state
+	state = {
+		"level": 1,
+		"loot": 0,
+		"score": 0,
+		"time": 0,
+		"status": STATUS.READY
+	}
 	
 func update(action, payload = null):
 	match action:
